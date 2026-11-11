@@ -1,0 +1,41 @@
+# Sources (accessed 2026-11-11):
+# https://docs.qwencloud.com/token-plan/personal/token-plan-personal-overview
+# https://docs.qwencloud.com/developer-guides/getting-started/latest-model
+# https://docs.qwencloud.com/developer-guides/text-generation/thinking
+# https://docs.qwencloud.com/api-reference/chat/openai-chat
+# https://docs.qwencloud.com/api-reference/chat/openai-responses
+# https://docs.qwencloud.com/api-reference/chat/anthropic
+# Preview: Token Plan only, 2026-11-11 10:00 to 2026-11-25 24:00 (UTC+8); the
+# model is retired after the preview. Alias: qwen4.0-max-preview (same model,
+# billed under the alias; no duplicate entry).
+# Toggle: enable_thinking true|false (hybrid; default true)
+# Effort: reasoning_effort = low|medium|xhigh (default xhigh); high maps to xhigh,
+# minimal to low, and none maps to enable_thinking=false.
+# Budget: thinking_budget (0..262144) cannot be combined with reasoning_effort.
+# API: {"enable_thinking":true,"reasoning_effort":"medium"} or
+# {"enable_thinking":true,"thinking_budget":16384}.
+schema = 2
+base_model = "alibaba/qwen4-max-preview"
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none", "tool"] }
+reasoning = { supported = true, toggle = true, effort = ["low", "medium", "xhigh"], budget = { min = 0, max = 262_144 } }
+structured_output = true
+
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
+
+[api.responses]
+sdk = { aisdk = "@ai-sdk/openai", opencodeai = "@opencode/ai/providers/alibaba/responses" }
+
+[api.messages]
+base_url = "https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1"
+sdk = { aisdk = "@ai-sdk/anthropic", opencodeai = "@opencode/ai/providers/alibaba/messages" }
+capabilities = { tools = { choice = ["auto", "none", "required", "tool"] } }
+
+[cost.text.input]
+price = 0
+cache = { read = 0, write = 0 }
+
+[cost.text.output]
+price = 0

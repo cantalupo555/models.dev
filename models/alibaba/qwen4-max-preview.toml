@@ -1,0 +1,32 @@
+# Sources (accessed 2026-11-11):
+# https://docs.qwencloud.com/developer-guides/getting-started/latest-model
+# https://docs.qwencloud.com/changelog/models
+# https://docs.qwencloud.com/developer-guides/getting-started/text-generation-models
+# https://docs.qwencloud.com/token-plan/personal/token-plan-personal-overview
+# https://docs.qwencloud.com/token-plan/team/token-plan-team-overview
+# https://docs.qwencloud.com/developer-guides/text-generation/thinking
+# https://docs.qwencloud.com/developer-guides/multimodal/vision
+# Preview: 2026-11-11 10:00 to 2026-11-25 24:00 (UTC+8), Token Plan only; the
+# model is retired after the preview. No benchmark table or model card is
+# published yet.
+schema = 2
+name = "Qwen4 Max Preview"
+description = "Preview of the Qwen4 flagship: 1M-token multimodal reasoning model for coding, frontend design, office work, and long-horizon agentic tasks"
+family = "qwen"
+open_weights = false
+release_date = "2026-11-11"
+
+[modalities]
+input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic", "video/mp4", "video/x-msvideo", "video/x-matroska", "video/quicktime", "video/x-flv", "video/x-ms-wmv"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = true
+
+[limit]
+context = 1_000_000
+output = 393_216
